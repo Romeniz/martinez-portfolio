@@ -1,33 +1,18 @@
+import ProjectCard from "../components/ProjectCard.jsx";
+import { projects } from "../data/content.js";
+import { inner, sectionCls } from "../components/ui.js";
 
-const projects = [
-  {
-    title: 'Portfolio Website',
-    description: 'A personal website built with React.',
-  },
-  {
-    title: 'Analytics Dashboard',
-    description: 'A data visualization project for school.',
-  },
-  {
-    title: 'Research Management System',
-    description: 'A concept for organizing research documents.',
-  },
-]
-
-function Projects() {
+export default function Projects() {
   return (
-    <section className="page-section">
-      <h1>My Projects</h1>
-      <div className="project-grid">
-        {projects.map((project) => (
-          <article className="project-card" key={project.title}>
-            <h2>{project.title}</h2>
-            <p>{project.description}</p>
-          </article>
-        ))}
+    <section className={sectionCls}>
+      <div className={inner}>
+        <h1 className="sr-only">Projects</h1>
+        <div>
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} index={i} />
+          ))}
+        </div>
       </div>
     </section>
-  )
+  );
 }
-
-export default Projects

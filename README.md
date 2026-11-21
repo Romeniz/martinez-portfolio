@@ -1,16 +1,31 @@
-# React + Vite
+# Jerome R. Martinez — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Personal portfolio built with **React + Vite + React Router + Tailwind CSS v4** (mobile-first). One fixed screen, no page scrolling:
+Home, About, Skills, Projects and Contact are panels you switch between from the dock in the header or the
+buttons on Home. The n Bloom loading screen plays once per browser session (see `src/components/Loader.jsx`).
 
-Currently, two official plugins are available:
+## Run locally
+```bash
+npm install
+npm run dev      # development
+npm run build    # production build -> dist/
+npm run preview  # preview the build
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Styling (Tailwind, mobile-first)
+All styling is Tailwind utility classes in the components. Un-prefixed classes are the phone layout;
+`sm:` (640px), `md:` (768px) and `lg:` (1024px) add tablet and desktop. Colours, fonts and animations are
+defined once in `src/index.css` under `@theme`, and shared button/section class strings are in `src/components/ui.js`.
+The Contact page turns dark through the `dk:` variant (any element inside `data-dark`).
 
-## React Compiler
+## Edit your content
+Everything (name, intro, skills, projects, contact) lives in `src/data/content.js`.
+- **Contact:** `github` is set. `email`, `phone` (with `phoneDisplay` / `phoneHref`) and `linkedin` (with
+  `linkedinHandle`) are empty: fill them in and their rows, the footer links and the Email button appear on their own.
+- **Projects:** each entry in `projects` renders through `src/components/ProjectCard.jsx`. Add `links: [{ label: "Repo", href: "https://..." }]` to show link buttons.
+- **Routes:** `/`, `/about`, `/skills`, `/projects`, `/contact`; any other URL shows `src/pages/NotFound.jsx`.
+- **Photos:** Home uses `src/assets/hero-cutout-bw.webp`, About uses `src/assets/portrait-bw.webp`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Hosting note
+The site uses `BrowserRouter`, so the host must serve `index.html` for unknown paths
+(Netlify/Vercel/Cloudflare Pages do this; for GitHub Pages switch to `HashRouter` in `src/main.jsx`).
